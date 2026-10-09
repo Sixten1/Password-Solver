@@ -1,3 +1,6 @@
+
+
+
 class GeneratePassword:
     def generate():
         print("Password should have at lesat 6 characters and max 12 characters")
@@ -12,8 +15,20 @@ class GeneratePassword:
 
         
 class ImportPasswords:
-    pass
+    def lists_passwords():
 
+        with open("10k-most-common.txt", "r", encoding="utf-8") as file:
+            content = file.read()
+
+        words = content.splitlines()
+        password_list = []
+
+        for i in words:
+            password_list.append(i)
+
+        return password_list
+
+    
 class PasswordSolver:
     pass
 
@@ -22,5 +37,6 @@ class PasswordSolver:
 def main():
     password = GeneratePassword.generate()
     print(password)
+    ImportPasswords.lists_passwords()
 
 main()
