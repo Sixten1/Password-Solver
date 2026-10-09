@@ -17,7 +17,7 @@ class GeneratePassword:
 class ImportPasswords:
     def lists_passwords():
 
-        with open("10k-most-common.txt", "r", encoding="utf-8") as file:
+        with open("rockyou.txt", "r", encoding="utf-8") as file:
             content = file.read()
 
         words = content.splitlines()
@@ -30,13 +30,24 @@ class ImportPasswords:
 
     
 class PasswordSolver:
-    pass
+    def solver(password, password_list):
+        tries = 0
+        for i in password_list:
+            tries += 1
+            if i == password:
+                print(f"Ditt lösenord är {i}")
+                print(f"Tried {tries} pass")
+
+        else:
+            print(f"couldnt find password... tried {tries} passwords")
 
 
 
 def main():
     password = GeneratePassword.generate()
     print(password)
-    ImportPasswords.lists_passwords()
+    password_list = ImportPasswords.lists_passwords()
+    PasswordSolver.solver(password, password_list)
+
 
 main()
