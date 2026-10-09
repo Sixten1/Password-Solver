@@ -4,12 +4,15 @@ import string
 
 class GeneratePassword:
     def generate():
-        print("Password should have at least 2 characters and max 6 characters")
-        password = input("Write Your password:").lower()
+        characters = string.ascii_lowercase + string.digits
 
-        while len(password) < 2 or len(password) > 6:
-            print("Password should have at least 6 characters and max 12 characters")
-            password = input("Write Your password:").lower()
+        password = input("Write your password: ").lower()
+
+        while len(password) < 2 or len(password) > 6 or not all(
+            char in characters for char in password
+        ):
+            print("Invalid password! Use 2-6 characters (a-z, 0-9).")
+            password = input("Write your password: ").lower()
 
         return password
 
@@ -61,7 +64,6 @@ def main():
 
     password = GeneratePassword.generate()
     start = time.perf_counter()
-    print(password)
     password_list = ImportPasswords.lists_passwords()
     find_password = PasswordSolver.solver(password, password_list)
     if find_password == False:
